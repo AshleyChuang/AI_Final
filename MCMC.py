@@ -1,7 +1,8 @@
 #          A  B  C  D  E  F
 import random
-num_of_nodes = 5
-
+num_of_nodes = 2
+num_of_targets = 4
+num_of_loop = 1000
 
 class Node:
 	def __init__(self, num_row, num_col):
@@ -36,9 +37,11 @@ def probability(p): # p is a list
 		p2 += p[i]
 		if random.randint(0, 99) < p2 * 100:
 			return i # can be changed
+score = [0]*num_of_targets  # Need to be adjustable!
+
 
 n1_state = 0
-for i in range(0, 10, 1):
+for i in range(0, num_of_loop, 1):
 	print str(i) + " times:"
 	current_state = n1_state
 	for n in range(0, len(nodes), 1):
@@ -48,4 +51,8 @@ for i in range(0, 10, 1):
 		next_state = probability(p)
 		print str(current_state) + "-> " + str(next_state)
 		current_state = next_state
-
+	score[next_state] += 1
+	print score
+for i in range(len(score)):
+	score[i] = float(score[i])/float(num_of_loop);
+print score
