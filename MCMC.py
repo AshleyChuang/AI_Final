@@ -11,3 +11,9 @@ CPT = [[ 0 ,  0 , 0.1, 0.9,  0 ,  0 ],
 
 
 counter = [100, 150, 200, 110, 230, 300]
+
+import random
+
+def probability(p):
+    if random.randint(0, 99) < p * 100:
+        return 1 # can be changed
