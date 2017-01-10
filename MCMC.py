@@ -1,22 +1,51 @@
 #          A  B  C  D  E  F
-initial = [1, 0, x, x, x, x]
-Num_of_nodes = 5;
-startingNode = 1;
-
-CPT = [[ 0 ,  0 , 0.1, 0.9,  0 ,  0 ],
-       [ 0 ,  0 , 0.2, 0.8,  0 ,  0 ],
-       [ 0 ,  0 ,  0 ,  0 , 0.3, 0.7],
-       [ 0 ,  0 ,  0 ,  0 , 0.4, 0.6],
-       [0.5, 0.5,  0 ,  0 ,  0 ,  0 ],
-       [0.6, 0.4,  0 ,  0 ,  0 ,  0 ]]
-
-for i in range(0, Num_of_nodes, 1):
-	
-
-counter = [100, 150, 200, 110, 230, 300]
-
 import random
+num_of_nodes = 5
 
-def probability(p):
-    if random.randint(0, 99) < p * 100:
-        return 1 # can be changed
+
+class Node:
+	def __init__(self, num_row, num_col):
+		self.CPT = [[0 for x in range(num_row)] for y in range(num_col)] 
+	def getCPT(self, row, col):
+		return self.CPT[row][col]
+	def updateCPT(self, list):
+		self.CPT = list;
+	def printCPT(self):
+		print self.CPT
+	def getNumOfNextStates(self):
+		return len(self.CPT[0])
+	def getNumOfCurrentStates(self):
+		return len(self.CPT)
+nodes = []
+
+n1 = Node(2, 3)
+CPT_temp = [ [0.2, 0.4, 0.4], [0.1, 0.2, 0.7]]
+n1.updateCPT(CPT_temp)
+n1.printCPT()
+nodes.append(n1)
+
+n2 = Node(3, 4)
+CPT_temp = [ [0.1, 0.5, 0.2, 0.2], [0.45, 0.2, 0.1, 0.25], [0.1, 0.2, 0.4, 0.3]]
+n2.updateCPT(CPT_temp)
+n2.printCPT()
+nodes.append(n2)
+
+def probability(p): # p is a list
+	p2 = 0.0
+	for i in range(len(p)):
+		p2 += p[i]
+		if random.randint(0, 99) < p2 * 100:
+			return i # can be changed
+
+n1_state = 0
+for i in range(0, 10, 1):
+	print str(i) + " times:"
+	current_state = n1_state
+	for n in range(0, len(nodes), 1):
+		p = []
+		for k in range(0, nodes[n].getNumOfNextStates(), 1):
+			p.append(nodes[n].getCPT(current_state, k))
+		next_state = probability(p)
+		print str(current_state) + "-> " + str(next_state)
+		current_state = next_state
+
