@@ -2,7 +2,7 @@
 import random
 import sys
 num_of_nodes = 2
-num_of_loop = 1000
+num_of_loop = 10000
 
 class Node:
 	def __init__(self, num_row, num_col):
@@ -80,7 +80,7 @@ if up_to_down:
 		score[next_state] += 1
 		total_run += 1
 else:
-	while total_run < 1000:
+	while total_run < num_of_loop:
 		first_input = random.randint(0, num_of_targets-1)
 		current_state = first_input
 		for n in range(0, len(nodes), 1):
