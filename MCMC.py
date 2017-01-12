@@ -36,7 +36,6 @@ n2.printCPT()
 if input_layer == 1:
 	nodes.append(n1)
 	num_of_targets = 4
-
 	if output_layer == 3:
 		nodes.append(n2)
 elif input_layer == 2:
@@ -48,7 +47,7 @@ elif input_layer == 2:
 		nodes.append(n2)
 		num_of_targets = 4
 elif input_layer == 3:
-	up_to_down = False;
+	up_to_down = False
 	if output_layer == 1:
 		nodes.append(n1)
 		nodes.append(n2)
@@ -75,7 +74,7 @@ if up_to_down:
 		for n in range(0, len(nodes), 1):
 			p = []
 			print "number of next states: " + str(nodes[n].getNumOfNextStates())
-0			for k in range(0, nodes[n].getNumOfNextStates(), 1):
+			for k in range(0, nodes[n].getNumOfNextStates(), 1):
 				p.append(nodes[n].getCPT(current_state, k))
 			print p
 			next_state = probability(p)
@@ -86,7 +85,8 @@ if up_to_down:
 else:
 	for i in range(0, num_of_loop, 1):
 		print str(i) + "times:"
-		current_state = # random
+		first_input = random.randint(0, num_of_targets-1)
+		current_state = first_input
 		for n in range(0, len(nodes), 1):
 			p = []
 			for k in range(0, nodes[n].getNumOfNextStates(), 1):
@@ -94,7 +94,7 @@ else:
 			next_state = probability(p)
 			current_state = next_state
 		if next_state == n1_state:
-			
+			score[first_input] += 1				
 for i in range(len(score)):
 	score[i] = float(score[i])/float(num_of_loop);
 print score
