@@ -36,6 +36,7 @@ n2.printCPT()
 if input_layer == 1:
 	nodes.append(n1)
 	num_of_targets = 4
+
 	if output_layer == 3:
 		nodes.append(n2)
 elif input_layer == 2:
@@ -64,6 +65,7 @@ def probability(p): # p is a list
 			return i # can be changed
 score = [0]*num_of_targets  # Need to be adjustable!
 
+
 current_state = 0
 next_state = 0
 if up_to_down:
@@ -73,7 +75,7 @@ if up_to_down:
 		for n in range(0, len(nodes), 1):
 			p = []
 			print "number of next states: " + str(nodes[n].getNumOfNextStates())
-			for k in range(0, nodes[n].getNumOfNextStates(), 1):
+0			for k in range(0, nodes[n].getNumOfNextStates(), 1):
 				p.append(nodes[n].getCPT(current_state, k))
 			print p
 			next_state = probability(p)
@@ -96,3 +98,31 @@ else:
 for i in range(len(score)):
 	score[i] = float(score[i])/float(num_of_loop);
 print score
+
+def backtrack(input_3):
+	
+	input_1 = []
+	for i in range(len(input_1)):
+		input_1[i] = random.randint(0, 1)
+	
+	# do MCMC
+	
+	indicator = []
+	for i in len(input_3):
+		if input_3[i] == 1:
+			indicator.append(i)
+	
+	score = []
+	for i in range(len(input_1)):
+		score.append(0)
+	if next_state in indicator:
+		score[next_state] = score[next_state] + 1
+	
+	total = 0
+	for i in score:
+		total = total + i
+	p = []
+	for i in score:
+		p.append(i / total)
+	
+	return p
